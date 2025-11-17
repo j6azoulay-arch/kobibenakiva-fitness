@@ -1,0 +1,921 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>מאמן כושר אישי – ליווי אימונים ותפריטי תזונה</title>
+  <meta name="description" content="אימונים אישיים, בניית תפריטי תזונה וליווי אחד על אחד לכל מטרה. שיחת ייעוץ ראשונית חינם." />
+
+<!-- Icons -->
+<link rel="icon" href="assets/icons/favicon.ico">
+<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.json">
+ <!-- Optional: Safari pinned tab -->
+  <!-- <link rel="mask-icon" href="assets/icons/safari-pinned-tab.svg" color="#d4af37"> -->
+
+  <!-- Performance: fonts preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Preload key images -->
+  <link rel="preload" as="image" href="assets/img/logo.png" fetchpriority="high">
+  <link rel="preload" as="image" href="assets/img/hero-poster.jpg" fetchpriority="high">
+
+  <!-- Favicon / Touch -->
+  <link rel="icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+  <!-- SEO / Social -->
+  <link rel="canonical" href="https://example.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="מאמן כושר אישי – ליווי אימונים ותפריטי תזונה">
+  <meta property="og:description" content="אימונים אישיים, בניית תפריטי תזונה וליווי אחד על אחד. שיחת ייעוץ חינם.">
+  <meta property="og:image" content="https://example.com/og.jpg">
+  <meta property="og:locale" content="he_IL">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Structured Data: Location + FAQ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SportsActivityLocation",
+    "name": "Kobi Ben Akiva - Personal Trainer",
+    "image": "https://example.com/og.jpg",
+    "description": "אימונים אישיים ותזונה מותאמת אישית. שיחת ייעוץ חינם.",
+    "address": {"@type": "PostalAddress","addressCountry": "IL"},
+    "areaServed": "Israel",
+    "telephone": "+972505069235",
+    "sameAs": ["https://wa.me/972505069235"]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {"@type":"Question","name":"מה כוללת פגישת הייעוץ?","acceptedAnswer":{"@type":"Answer","text":"בדיקת מטרות, סקירת מצב נוכחי ותכנית פעולה ראשונית מותאמת אישית."}},
+      {"@type":"Question","name":"אפשר אימונים אונליין?","acceptedAnswer":{"@type":"Answer","text":"כן. אימונים בשידור חי, תוכנית אימונים ותזונה מותאמת ומעקב בוואטסאפ."}}
+    ]
+  }
+  </script>
+
+  <!-- Heebo -->
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* ========= משתנים ========= */
+    :root{
+      --text:#f7f7f7; --muted:#c9c9c9;
+      --gold:#d4af37; --gold-700:#a88928; --accent:#111111;
+      --ok:#19c37d; --error:#ff5a5f;
+      --panel-alpha: rgba(20,20,20,.55);
+      --gold-grad: linear-gradient(135deg,#f6e27a 0%, #d4af37 45%, #b28c1a 100%);
+      --wa1:#34f0a5; --wa2:#22c983; --wa3:#128C7E;
+      --bg-desktop:url('assets/img/bg-desktop.jpg');
+      --bg-mobile:url('assets/img/bg-mobile.png');
+
+      --below-wave: transparent; /* לשינוי ללבן: #fff */
+
+      /* גובה הדר (נשאר אותו דבר) */
+      --header-h: 58px;
+    }
+
+    html{scroll-behavior:smooth}
+    *{box-sizing:border-box}
+
+    body{
+      margin:0; color:var(--text);
+      font-family:"Heebo",system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+      background-image: var(--bg-desktop);
+      background-repeat:no-repeat;
+      background-size:cover;
+      background-position:center;
+      background-attachment:fixed;
+      overflow-x:hidden;
+    }
+    @media (max-width: 780px){
+      body{ background-image: var(--bg-mobile); background-attachment:scroll; background-position:center top; }
+    }
+
+    a{color:inherit; text-decoration:none}
+    img{max-width:100%; display:block}
+    .container{width:min(1120px,92vw); margin-inline:auto}
+
+    /* ========= נגישות ========= */
+    .skip-link{position:absolute; top:-40px; inset-inline-start:10px; background:#000; color:#fff; padding:8px 12px; border-radius:8px; z-index:1000}
+    .skip-link:focus{top:10px}
+
+    /* ========= כפתורים ========= */
+    .btn{appearance:none; border:0; cursor:pointer; border-radius:999px; padding:12px 22px; font-weight:700; transition:all .35s ease; display:inline-flex; align-items:center; gap:.6rem; position:relative; overflow:hidden}
+    .btn:focus{outline:none}
+    .btn:focus-visible{box-shadow:0 0 0 3px rgba(255,255,255,.15), 0 0 0 6px rgba(212,175,55,.25)}
+    .btn-primary{ background:var(--gold-grad); color:#111; box-shadow:0 4px 14px rgba(212,175,55,.25) }
+    .btn-primary::after{ content:""; position:absolute; inset:0; background:linear-gradient(120deg,rgba(255,255,255,.28),rgba(255,255,255,0) 60%); transform:translateX(-110%); transition:transform .6s ease }
+    .btn-primary:hover{ transform:translateY(-2px) scale(1.02); box-shadow:0 6px 20px rgba(212,175,55,.35) }
+    .btn-primary:hover::after{ transform:translateX(110%) }
+    .chip{display:inline-block; padding:6px 10px; border:1px solid #ffffff20; border-radius:999px; font-size:.9rem; background:#ffffff10}
+    .subtle{color:var(--muted)}
+
+    /* וואטסאפ */
+    .btn-cta{
+      background:linear-gradient(135deg, var(--wa1) 0%, var(--wa2) 45%, var(--wa3) 100%);
+      color:#fff; border-radius:999px; padding:12px 20px; display:inline-flex; align-items:center; gap:.5rem;
+      border:none; box-shadow: 0 0 0 1px rgba(255,255,255,.14) inset, 0 10px 22px rgba(18,140,126,.38), 0 0 26px rgba(52,240,165,.18);
+      transition:all .35s ease; position:relative; overflow:hidden;
+    }
+    .btn-cta::after{ content:""; position:absolute; inset:0; background:linear-gradient(120deg, rgba(255,255,255,.38), rgba(255,255,255,0) 60%); transform:translateX(-110%); transition:transform .7s ease; pointer-events:none }
+    .btn-cta:hover{ transform:translateY(-2px) scale(1.02); box-shadow: 0 0 0 1px rgba(255,255,255,.16) inset, 0 12px 28px rgba(18,140,126,.44), 0 0 34px rgba(52,240,165,.22) }
+    .btn-cta:hover::after{ transform:translateX(110%) }
+    .btn-cta:focus{outline:none}
+    .btn-cta:focus-visible{box-shadow:0 0 0 3px rgba(255,255,255,.15),0 0 0 6px rgba(34,201,131,.35)}
+    .btn-cta svg{width:20px; height:20px; fill:currentColor}
+    .btn-label{font-weight:800}
+    @media (max-width:48px){ .btn-cta{width:48px; height:48px; padding:0; justify-content:center} .btn-label{display:none} .btn-cta svg{width:22px; height:22px} }
+
+    /* ========= כפתור גלילה "שקוף-זהב" ========= */
+    .btn-glass{
+      background:transparent;
+      color:var(--gold);
+      border:1px solid rgba(212,175,55,.65);
+      padding:10px 16px; font-weight:800;
+      backdrop-filter: blur(6px);
+      box-shadow: 0 6px 18px rgba(0,0,0,.25), inset 0 0 0 1px rgba(255,255,255,.06);
+    }
+    .btn-glass::after{
+      content:""; position:absolute; inset:0; pointer-events:none;
+      background:linear-gradient(120deg, rgba(255,255,255,.45), rgba(255,255,255,0) 60%);
+      transform:translateX(-120%); transition:transform .7s ease;
+      mix-blend-mode:screen;
+    }
+    .btn-glass:hover{ transform:translateY(-2px); }
+    .btn-glass:hover::after{ transform:translateX(120%) }
+
+    /* ========= Header ========= */
+    header{ position:fixed; inset-inline:0; top:0; z-index:30; backdrop-filter:blur(8px); background:transparent; border-bottom:1px solid #ffffff12 }
+    .nav{display:flex; align-items:center; justify-content:space-between; padding:8px 0; min-height:var(--header-h)}
+    /* הלוגו ממלא את גובה ההדר בלי עיוות */
+    .logo img{
+      height: calc(var(--header-h) - 10px);
+      width: auto;
+      max-height: calc(var(--header-h) - 10px);
+      object-fit: contain;
+    }
+
+    .cta-group{display:flex; gap:.5rem; align-items:center}
+
+    .menu{display:flex; align-items:center; font-weight:700; gap:0}
+    .menu a{ position:relative; padding:8px 16px; opacity:.95; transition:color .25s ease; z-index:2; font-size:.95rem }
+    .menu a:hover{color:var(--gold)}
+    .menu a + a::before{ content:""; position:absolute; z-index:1; top:24%; bottom:24%; right:-1px; width:2px; background:linear-gradient(180deg,#f6e27a,#d4af37 60%,#a88928); border-radius:2px }
+    @media (max-width:980px){
+      .menu a + a::before{display:none}
+      .burger{display:inline-flex; align-items:center}
+      .menu{
+        position:fixed; inset-inline:0; top:var(--header-h); background:#0e0e0ef0; backdrop-filter:blur(8px);
+        display:grid; gap:6px; padding:12px; transform:translateY(-120%); transition:.25s ease; z-index:25
+      }
+      .menu.open{transform:translateY(0)}
+      .menu a{padding:12px 14px; border-radius:12px; background:#ffffff08}
+    }
+    .burger{display:none; background:#ffffff10; border:1px solid #ffffff20; border-radius:12px; padding:10px 14px; font-size:1.1rem; color:var(--text)}
+
+    /* ========= HERO ========= */
+    .hero{ position:relative; min-height:92svh; display:grid; place-items:center; text-align:center; overflow:hidden; background:transparent; border-top:none }
+    .hero video{
+      position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0;
+      filter:contrast(1.05) saturate(1.05) brightness(.9);
+      animation:heroFadeIn 1.2s ease both;
+      -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 72%, transparent 100%);
+              mask-image: linear-gradient(to bottom, #000 0%, #000 72%, transparent 100%);
+    }
+    @keyframes heroFadeIn{from{opacity:0}to{opacity:1}}
+
+    .hero::before{ content:""; position:absolute; inset:0; z-index:1; background:radial-gradient(80% 80% at 50% 45%, rgba(0,0,0,0) 0%, rgba(0,0,0,.28) 75%, rgba(0,0,0,.45) 100%); }
+    .hero::after{ content:""; position:absolute; inset:0; z-index:1; background:linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,.18) 60%, rgba(0,0,0,.38) 100%); }
+    .hero .hero-inner{position:relative; z-index:2; padding-top:calc(var(--header-h) + 44px); padding-bottom:38px}
+    .hero h1{font-size:clamp(1.8rem,3.2vw + 1rem,3.2rem); margin:0 0 10px}
+    .hero p{margin:0 0 22px}
+    .hero .badges{display:flex; gap:.6rem; justify-content:center; flex-wrap:wrap; margin-top:10px}
+
+    /* ========= כפתור גלילה ========= */
+    .scroll-cue{
+      position:absolute; left:50%; transform:translateX(-50%); bottom:14px; z-index:3; opacity:.96;
+      display:inline-flex; align-items:center; gap:.5rem; font-weight:800; font-size:.95rem; letter-spacing:.02em;
+      border-radius:999px; cursor:pointer; user-select:none;
+    }
+    .scroll-cue svg{ width:16px; height:16px; fill:currentColor }
+    .scroll-cue:focus-visible{outline:none; box-shadow:0 0 0 3px rgba(255,255,255,.15), 0 0 0 6px rgba(212,175,55,.25)}
+
+    /* ========= GOLD FADE ========= */
+    .gold-fade{ position:relative; height:96px; margin-top:-96px; z-index:4; pointer-events:none; background:linear-gradient(to bottom, rgba(212,175,55,0) 0%, rgba(212,175,55,.18) 55%, rgba(212,175,55,.35) 100%); mix-blend-mode:screen; }
+
+    /* ========= Wave Divider ========= */
+    .wave-divider{ position:relative; z-index:5; height:80px; pointer-events:none; overflow:hidden; background:transparent; border:0; }
+    .wave-divider svg{ position:absolute; inset:0; width:100%; height:100%; display:block; transform: scaleY(-1); transform-origin: center; }
+    .wave-divider::before{
+      content:""; position:absolute; left:6%; right:6%; bottom:-1px; height:2px;
+      background:linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.55) 20%, rgba(255,255,255,.55) 80%, rgba(255,255,255,0) 100%);
+      opacity:.85; filter:blur(.4px); pointer-events:none;
+    }
+    .wave-divider::after{
+      content:""; position:absolute; inset:0; background:linear-gradient(120deg, rgba(255,255,255,.28), rgba(255,255,255,0) 60%);
+      transform:translateX(-120%); animation:waveShine 6s linear infinite; mix-blend-mode:screen; pointer-events:none;
+    }
+    @keyframes waveShine{ 0%{ transform:translateX(-120%) } 100%{ transform:translateX(120%) } }
+
+    /* ========= סקשנים ========= */
+    section{ position:relative; padding:64px 0; border-top:none; background:transparent }
+
+    /* #lead */
+    #lead{ position:relative; z-index:1; background:var(--below-wave); margin-top:0; padding-top:64px; opacity:0; transform:translateY(22px) scale(.98); filter:blur(4px); transition:opacity .7s ease, transform .7s ease, filter .7s ease; }
+    #lead::before{ content:""; position:absolute; inset-inline:0; top:0; height:36px; pointer-events:none; z-index:0; backdrop-filter: blur(10px) saturate(1.05) brightness(1.08); -webkit-backdrop-filter: blur(10px) saturate(1.05) brightness(1.08); }
+    #lead::after{ content:""; position:absolute; inset-inline:0; top:0; height:72px; z-index:0; pointer-events:none; background:linear-gradient(to bottom, rgba(246,226,122,.2) 0%, rgba(212,175,55,.12) 45%, transparent 100%); mix-blend-mode:screen; }
+    #lead.in-view{ opacity:1; transform:none; filter:none }
+
+    /* פאנלים */
+    .panel{ background:var(--panel-alpha); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); border:1px solid #ffffff18; border-radius:22px; padding:22px; box-shadow:0 8px 22px rgba(0,0,0,.32), inset 0 1px 0 rgba(255,255,255,.06); transition:transform .3s ease, box-shadow .3s ease; }
+    .panel:hover{transform:translateY(-4px); box-shadow:0 12px 30px rgba(0,0,0,.42), inset 0 1px 0 rgba(255,255,255,.06)}
+    h2{margin:0 0 14px}
+
+    /* טופס וגרידים */
+    .lead .wrap{display:grid; grid-template-columns:1.1fr .9fr; gap:28px}
+    form{display:grid; gap:14px}
+    .table-grid{display:grid; grid-template-columns:180px 1fr; gap:8px 12px; align-items:center}
+    label{font-weight:600}
+    input,select,textarea{
+      width:100%; padding:12px; border-radius:12px; border:1px solid #ffffff26; background:#1a1a1a; color:var(--text);
+      outline:none; transition:border-color .2s ease, box-shadow .2s ease
+    }
+    input:focus,select:focus,textarea:focus{border-color:var(--gold); box-shadow:0 0 0 3px #d4af3722}
+    .actions{display:flex; gap:10px; flex-wrap:wrap; padding-top:6px}
+    .note{font-size:.92rem; color:var(--muted)}
+
+/* מבטלים כיוון RTL בתוך הקרוסלה כדי שזיהוי התזוזה יעבוד נכון */
+.carousel, .track {
+  direction: ltr;
+}
+    .carousel{position:relative; overflow:hidden; border-radius:18px; border:1px solid #ffffff12; background:transparent}
+    .track{display:flex; transition:transform .45s ease; will-change:transform}
+/* כל שקופית תופסת 100% מהקרוסלה ולא משתנה בגודל */
+.slide{
+  flex: 0 0 100%;
+  aspect-ratio: 16/9;
+  background: transparent;
+}
+    .slide img{width:100%; height:100%; object-fit:cover; object-position:center center; background:transparent}
+    .nav-btn{position:absolute; top:50%; transform:translateY(-50%); border:none; background:#00000066; color:#fff; padding:10px 14px; border-radius:12px; cursor:pointer}
+    .nav-btn:hover{background:#000000a6}
+    .prev{left:12px}.next{right:12px}
+    .dots{display:flex; gap:8px; justify-content:center; padding:12px}
+    .dot{width:8px; height:8px; border-radius:999px; background:#ffffff30}
+    .dot.active{background:#d4af37}
+
+    /* השוואה אינטראקטיבית לפני/אחרי */
+    .compare-wrap { position:relative; max-width:720px; margin:auto; }
+    .compare { position:relative; overflow:hidden; border-radius:22px; border:1px solid #ffffff18; box-shadow:0 8px 22px rgba(0,0,0,.32); }
+    .compare img { display:block; width:100%; height:auto; object-fit:cover; }
+    .compare .after { position:absolute; top:0; left:0; width:100%; height:100%; clip-path:inset(0 50% 0 0); transition:clip-path .25s ease; }
+
+    /* מסילה חדשה עם עומק */
+    .compare .slider{
+      position:absolute; bottom:12px; left:50%; transform:translateX(-50%);
+      width:min(90%, 620px); height:12px; appearance:none; background:transparent; border-radius:999px;
+    }
+    /* WebKit track */
+    .compare .slider::-webkit-slider-runnable-track{
+      height:12px; border-radius:999px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.25), rgba(255,255,255,0)) top/100% 50% no-repeat,
+        linear-gradient(90deg, #3a3a3a, #1e1e1e);
+      box-shadow: inset 0 2px 4px rgba(0,0,0,.45), inset 0 -1px 0 rgba(255,255,255,.08);
+      border:1px solid #ffffff22;
+    }
+    /* Firefox track */
+    .compare .slider::-moz-range-track{
+      height:12px; border-radius:999px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.25), rgba(255,255,255,0)) top/100% 50% no-repeat,
+        linear-gradient(90deg, #3a3a3a, #1e1e1e);
+      box-shadow: inset 0 2px 4px rgba(0,0,0,.45), inset 0 -1px 0 rgba(255,255,255,.08);
+      border:1px solid #ffffff22;
+    }
+
+    /* ידית עגולה זהב עם ברק */
+    .compare .slider::-webkit-slider-thumb{
+      -webkit-appearance:none; appearance:none;
+      width:26px; height:26px; border-radius:50%;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(255,255,255,.7), rgba(255,255,255,0) 40%),
+        linear-gradient(135deg,#f6e27a 0%, #d4af37 60%, #b28c1a 100%);
+      border:2px solid #fff;
+      box-shadow: 0 2px 6px rgba(0,0,0,.45), 0 0 0 2px rgba(0,0,0,.15) inset;
+      cursor:grab; margin-top:-7px; /* למרכז על המסילה */
+    }
+    .compare .slider::-webkit-slider-thumb:active{ cursor:grabbing }
+
+    .compare .slider::-moz-range-thumb{
+      width:26px; height:26px; border-radius:50%;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(255,255,255,.7), rgba(255,255,255,0) 40%),
+        linear-gradient(135deg,#f6e27a 0%, #d4af37 60%, #b28c1a 100%);
+      border:2px solid #fff;
+      box-shadow: 0 2px 6px rgba(0,0,0,.45), 0 0 0 2px rgba(0,0,0,.15) inset;
+      cursor:grab;
+    }
+    .compare .slider:focus{ outline:none; }
+    .compare .slider:focus-visible{ box-shadow:0 0 0 4px rgba(212,175,55,.25) }
+
+    /* רמז ברור לגרירה */
+    .compare-hint{
+      position:absolute; top:12px; right:12px; z-index:2;
+      display:inline-flex; align-items:center; gap:.4rem;
+      padding:8px 12px; border-radius:999px; font-weight:800; font-size:.9rem; color:#111;
+      background:var(--gold-grad);
+      box-shadow:0 8px 18px rgba(212,175,55,.25);
+      animation:hintPulse 2.2s ease-in-out infinite;
+    }
+    .compare-hint svg{width:16px; height:16px}
+    @keyframes hintPulse{ 0%,100%{ transform:translateY(0); opacity:.95 } 50%{ transform:translateY(2px); opacity:1 } }
+
+    /* CTA צף בנייד */
+    .sticky-cta{ position:fixed; inset-inline:16px; bottom:calc(env(safe-area-inset-bottom,0) + 12px); background:var(--gold-grad); color:#111; border-radius:999px; padding:14px 18px; text-align:center; font-weight:800; box-shadow:0 10px 24px rgba(0,0,0,.35); z-index:40; display:none }
+    @media (max-width:780px){ .sticky-cta{display:block} }
+
+    /* רספונסיביות */
+    @media (max-width:980px){
+      .lead .wrap{grid-template-columns:1fr}
+      .table-grid{grid-template-columns:1fr}
+      .hero .hero-inner{padding-top:calc(var(--header-h) + 36px)}
+      .menu{gap:12px; font-size:.95rem}
+    }
+    @media (max-width:780px){
+      .hero{min-height:80svh}
+      .actions .btn, .actions .btn-cta{width:100%; justify-content:center}
+      .hero video{
+        -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 65%, transparent 100%);
+                mask-image: linear-gradient(to bottom, #000 0%, #000 65%, transparent 100%);
+      }
+      .wave-divider{ height:68px; }
+      .wave-divider::before{ left:10%; right:10%; opacity:.75; }
+      #lead{ padding-top:56px }
+      #lead::before{ height:28px }
+    }
+
+    /* נגישות תנועה */
+    @media (prefers-reduced-motion: reduce){
+      .hero video{display:none}
+      .wave-divider::after{animation:none}
+      #lead{transition:none; opacity:1; transform:none; filter:none}
+      .compare-hint{animation:none}
+    }
+
+    /* אנימציות הופעה כלליות */
+    .reveal{ opacity:0; transform:translateY(16px); transition:opacity .6s ease, transform .6s ease; will-change:opacity, transform }
+    .reveal.in{ opacity:1; transform:none }
+    .delay-1{transition-delay:.05s} .delay-2{transition-delay:.1s} .delay-3{transition-delay:.15s} .delay-4{transition-delay:.2s}
+	
+	/* === תיקוני מובייל כלליים === */
+@media (max-width: 780px){
+
+  /* 1) העלמת פס/ברק הזהב למעלה */
+  .gold-fade{ display:none !important; }
+  .wave-divider{ display:none !important; }
+
+  /* 2) תעודות והכשרות — טור אחד במובייל */
+  .cert-grid{
+    grid-template-columns: 1fr !important;
+  }
+
+  /* 3) העלמת הכפתור הצף במובייל */
+  .sticky-cta{ display:none !important; }
+}
+
+/* ===== לא מסתירים את הסקשנים האלה בשום מצב ===== */
+#lead,
+#beforeafter{
+  opacity: 1 !important;
+  transform: none !important;
+  filter: none !important;
+}
+
+/* וגם כל מה שמסומן reveal בתוכם – שיישאר גלוי */
+#lead .reveal,
+#beforeafter .reveal{
+  opacity: 1 !important;
+  transform: none !important;
+  filter: none !important;
+}
+
+/* === מובייל: להחזיר את הגל + פס הזהב, קטנים ויפה באמצע === */
+@media (max-width: 780px){
+  /* מחזירים את שני האלמנטים */
+  .gold-fade{ 
+    display: block !important; 
+    height: 56px;           /* היה ~96px – כיווץ עדין */
+    margin-top: -56px;      /* לשבת על תחתית הווידאו כמו קודם */
+  }
+  .wave-divider{ 
+    display: block !important; 
+    height: 56px;           /* היה 68–80px – כיווץ עדין */
+  }
+
+  /* סידור מרווחים אחרי הגל, כדי שלא יראו קפיצה */
+  #lead{ padding-top: 48px; }  /* אפשר 40–56px לפי הטעם */
+
+  /* ליתר ביטחון: ודא שהווידאו נשאר חתוך יפה למעלה */
+  .hero video{
+    -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 65%, transparent 100%);
+            mask-image: linear-gradient(to bottom, #000 0%, #000 65%, transparent 100%);
+  }
+}
+
+  </style>
+</head>
+<body>
+  <a href="#lead" class="skip-link">דלג לטופס</a>
+
+  <header>
+    <div class="container nav">
+      <div class="logo" aria-label="לוגו המאמן">
+        <!-- שים/י כאן את קובץ הלוגו שלך; המידות נשלטות ב-CSS כדי לשמור יחס מושלם -->
+        <img src="assets/img/logo.png" alt="לוגו המאמן" width="0" height="0" style="width:auto;height:auto" decoding="async">
+      </div>
+
+      <button class="burger" aria-expanded="false" aria-controls="main-menu" aria-label="פתיחת תפריט">☰</button>
+
+      <nav class="menu" id="main-menu" aria-label="ניווג ראשי">
+        <a href="#services">שירותים והתמחויות</a>
+        <a href="#certs">תעודות והכשרות</a>
+        <a href="#studio">הסטודיו שלי</a>
+        <a href="#beforeafter">לפני ואחרי</a>
+      </nav>
+
+      <div class="cta-group">
+        <a href="#lead" class="btn btn-primary">השאירו פרטים</a>
+        <button id="waTop" class="btn-cta" type="button" aria-label="וואטסאפ">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.52 3.48A11.77 11.77 0 0 0 12.05 0C5.5 0 .22 5.28.22 11.79c0 2.08.55 4.07 1.6 5.85L0 24l6.52-1.67a11.77 11.77 0 0 0 5.53 1.41h.01c6.55 0 11.83-5.28 11.83-11.79 0-3.15-1.23-6.11-3.37-8.17zM12.06 21.5a9.7 9.7 0 0 1-4.95-1.36l-.35-.21-3.87.99 1.04-3.77-.23-.38a9.67 9.67 0 0 1-1.49-5.18c0-5.35 4.36-9.71 9.72-9.71 2.6 0 5.04 1.01 6.88 2.84a9.64 9.64 0 0 1 2.85 6.87c0 5.36-4.36 9.71-9.6 9.71zm5.53-7.28c-.3-.15-1.77-.88-2.05-.98-.27-.1-.47-.15-.67.15-.2.3-.77.98-.94 1.18-.17.2-.34.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.64-2.04-.17-.3-.02-.46.13-.61.14-.14.3-.37.45-.56.15-.2.2-.34.3-.57.1-.22.05-.41-.02-.57-.07-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51-.17-.01-.37-.01-.57-.01s-.53.07-.8.37c-.27.3-1.05 1.03-1.05 2.51 0 1.47 1.07 2.9 1.22 3.11.15.2 2.1 3.2 5.09 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.08 1.77-.72 2.02-1.41.25-.7.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35z"/></svg>
+          <span class="btn-label">וואטסאפ</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" aria-label="פתיח וידאו">
+    <video id="bgVideo" autoplay muted loop playsinline preload="metadata" poster="assets/img/hero-poster.jpg">
+      <source src="assets/video/hero-mobile.webm" type="video/webm" media="(max-width: 780px)">
+      <source src="assets/video/hero-mobile.mp4"  type="video/mp4"  media="(max-width: 780px)">
+      <source src="assets/video/hero.webm" type="video/webm">
+      <source src="assets/video/hero.mp4"  type="video/mp4">
+    </video>
+
+    <div class="container hero-inner">
+      <span class="chip">שיחת ייעוץ ראשונית – <b style="color:var(--gold)">חינם</b></span>
+      <h1>אימונים אישיים + תפריטי תזונה<br/>לכל הגילאים ולכל מטרה</h1>
+      <p class="subtle">ירידה במשקל · עליה במסת שריר · חיטוב · כושר לילדים ונוער · הכנה לאירועים ואתגרים</p>
+      <div class="actions" style="justify-content:center; margin-top:8px">
+        <a class="btn btn-primary" href="#lead">קבלו תכנית מותאמת אישית</a>
+        <button id="waHero" class="btn-cta" type="button" aria-label="שלחו וואטסאפ">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.52 3.48A11.77 11.77 0 0 0 12.05 0C5.5 0 .22 5.28.22 11.79c0 2.08.55 4.07 1.6 5.85L0 24l6.52-1.67a11.77 11.77 0 0 0 5.53 1.41h.01c6.55 0 11.83-5.28 11.83-11.79 0-3.15-1.23-6.11-3.37-8.17zM12.06 21.5a9.7 9.7 0 0 1-4.95-1.36l-.35-.21-3.87.99 1.04-3.77-.23-.38a9.67 9.67 0 0 1-1.49-5.18c0-5.35 4.36-9.71 9.72-9.71 2.6 0 5.04 1.01 6.88 2.84a9.64 9.64 0 0 1 2.85 6.87c0 5.36-4.36 9.71-9.6 9.71zm5.53-7.28c-.3-.15-1.77-.88-2.05-.98-.27-.1-.47-.15-.67.15-.2.3-.77.98-.94 1.18-.17.2-.34.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.64-2.04-.17-.3-.02-.46.13-.61.14-.14.3-.37.45-.56.15-.2.2-.34.3-.57.1-.22.05-.41-.02-.57-.07-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51-.17-.01-.37-.01-.57-.01s-.53.07-.8.37c-.27.3-1.05 1.03-1.05 2.51 0 1.47 1.07 2.9 1.22 3.11.15.2 2.1 3.2 5.09 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.08 1.77-.72 2.02-1.41.25-.7.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35z"/></svg>
+          <span class="btn-label">וואטסאפ</span>
+        </button>
+      </div>
+      <div class="badges">
+        <span class="chip">ליווי אישי אחד על אחד</span>
+        <span class="chip">תוצאות מדידות</span>
+        <span class="chip">זמינות והדרכה בוואטסאפ</span>
+      </div>
+    </div>
+
+    <button class="scroll-cue btn btn-glass" id="scrollCue" aria-label="גלילה לתוכן">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16.5a1 1 0 0 1-.7-.29l-6-6a1 1 0 1 1 1.4-1.42L12 13.59l5.3-5.3a1 1 0 1 1 1.4 1.42l-6 6a1 1 0 0 1-.7.29z"/></svg>
+      גללו לתוכן
+    </button>
+  </section>
+
+  <div class="gold-fade" aria-hidden="true"></div>
+
+  <!-- Wave Divider -->
+  <div class="wave-divider" aria-hidden="true">
+    <svg viewBox="0 0 1440 72" preserveAspectRatio="none" role="img" aria-label="מחלק גל דקורטיבי">
+      <defs>
+        <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#f6e27a"/>
+          <stop offset="45%" stop-color="#d4af37"/>
+          <stop offset="100%" stop-color="#b28c1a"/>
+        </linearGradient>
+        <mask id="waveMask">
+          <rect x="0" y="0" width="1440" height="72" fill="#fff"/>
+          <path d="M0,50 C240,62 480,36 720,50 C960,64 1200,42 1440,54 L1440,0 L0,0 Z" fill="#000"/>
+        </mask>
+      </defs>
+      <rect x="0" y="0" width="1440" height="72" fill="url(#goldGradient)" mask="url(#waveMask)"/>
+    </svg>
+  </div>
+
+  <!-- Lead Form -->
+  <section id="lead" class="lead">
+    <div class="container wrap">
+      <div class="panel">
+        <h2>השאירו פרטים ונחזור אליכם בהקדם</h2>
+        <p class="note">נשתמש במידע רק לצורך חזרה אליכם לגבי אימונים ותזונה. ⭐ שיחת ייעוץ ראשונית חינם.</p>
+
+<form id="leadForm" name="contact" method="POST" action="https://formspree.io/f/mananwkg">
+  <!-- אנטי-בוט (להשאיר!) -->
+  <input type="text" name="company" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
+  <!-- נושא המייל שתקבל -->
+  <input type="hidden" name="_subject" value="פניית ליד חדשה מהאתר">
+  <!-- לאן להפנות אחרי שליחה (דף תודה) -->
+  <input type="hidden" name="_next" value="/thank-you.html">
+       <input type="text" name="company" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+          <div class="table-grid">
+            <label for="name">שם מלא</label>
+            <input id="name" name="name" type="text" required placeholder="הזינו שם" autocomplete="name" />
+
+            <label for="phone">טלפון</label>
+            <input id="phone" name="phone" type="tel" required placeholder="05X-XXXXXXX" />
+
+            <label for="email">אימייל</label>
+            <input id="email" name="email" type="email" placeholder="name@example.com" autocomplete="email" />
+
+            <label for="goal">יעד אימון</label>
+            <select id="goal" name="goal" required>
+              <option value="" selected disabled>בחרו יעד</option>
+              <option>ירידה במשקל</option>
+              <option>חיטוב והצרת היקפים</option>
+              <option>עלייה במסת שריר</option>
+              <option>שיקום/חזרה לכושר</option>
+              <option>אימון לילדים/נוער</option>
+              <option>אחר</option>
+            </select>
+
+            <label for="time">שעה מועדפת</label>
+            <select id="time" name="time">
+              <option value="לא משנה" selected>לא משנה</option>
+              <option>בוקר</option>
+              <option>צהריים</option>
+              <option>ערב</option>
+            </select>
+
+            <label for="msg">הודעה</label>
+            <textarea id="msg" name="msg" rows="3" placeholder="כתבו לנו בקצרה על המטרה שלכם"></textarea>
+          </div>
+
+          <div class="actions">
+            <button class="btn btn-primary" type="submit">שליחה</button>
+            <button id="waBtn" class="btn-cta" type="button" aria-label="שליחת פרטים בוואטסאפ">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.52 3.48A11.77 11.77 0 0 0 12.05 0C5.5 0 .22 5.28.22 11.79c0 2.08.55 4.07 1.6 5.85L0 24l6.52-1.67a11.77 11.77 0 0 0 5.53 1.41h.01c6.55 0 11.83-5.28 11.83-11.79 0-3.15-1.23-6.11-3.37-8.17zM12.06 21.5a9.7 9.7 0 0 1-4.95-1.36l-.35-.21-3.87.99 1.04-3.77-.23-.38a9.67 9.67 0 0 1-1.49-5.18c0-5.35 4.36-9.71 9.72-9.71 2.6 0 5.04 1.01 6.88 2.84a9.64 9.64 0 0 1 2.85 6.87c0 5.36-4.36 9.71-9.6 9.71zm5.53-7.28c-.3-.15-1.77-.88-2.05-.98-.27-.1-.47-.15-.67.15-.2.3-.77.98-.94 1.18-.17.2-.34.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.64-2.04-.17-.3-.02-.46.13-.61.14-.14.3-.37.45-.56.15-.2.2-.34.3-.57.1-.22.05-.41-.02-.57-.07-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51-.17-.01-.37-.01-.57-.01s-.53.07-.8.37c-.27.3-1.05 1.03-1.05 2.51 0 1.47 1.07 2.9 1.22 3.11.15.2 2.1 3.2 5.09 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.08 1.77-.72 2.02-1.41.25-.7.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35z"/></svg>
+              <span class="btn-label">וואטסאפ</span>
+            </button>
+          </div>
+          <p id="formStatus" class="note" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+
+      <div class="panel">
+        <h3 style="margin:0 0 14px">למה לבחור בי?</h3>
+        <ul style="margin:0; padding-inline-start:20px; color:var(--muted)">
+          <li>תכנית אימונים ותזונה <b style="color:var(--text)">מותאמת אישית</b> על בסיס מדידות ומטרות.</li>
+          <li>מעקב שבועי, תיקוני טכניקה וסרטוני הסבר.</li>
+          <li>סטודיו מאובזר ונגיש · אפשרות לאונליין.</li>
+          <li>שיחת ייעוץ ראשונית <b style="color:var(--gold)">ללא עלות</b>.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section id="services">
+    <div class="container">
+      <h2>שירותים והתמחויות</h2>
+      <div class="panel">
+        <ul style="margin:0; padding-inline-start:20px">
+          <li>מאמן כושר</li><li>מאמן ריצה</li><li>יועץ תזונה לאורח חיים בריא</li>
+          <li>אימונים אישיים עם ליווי צמוד לכל התהליך</li>
+          <li>בניית תפריטים לספורטאים</li><li>תפריטים לכלל האוכלוסייה בהתאמה אישית</li>
+          <li>ליווי נשים בהריון</li><li>השמנת יתר לילדים</li>
+          <li>בניית תכניות ריצה למתחילים / למתקדמים</li>
+          <li>בניית תכניות ריצה למרחקים ארוכים, כולל מרתונים – עם ליווי תזונתי מתאים</li>
+        </ul>
+        <p class="subtle" style="margin-top:12px"><b style="color:var(--gold)">כלל התפריטים כוללים</b> מעקב שבועי של שקילות ומדידות, וליווי חודשי עם תמיכה והכוונה 24/7.</p>
+        <p class="subtle">בניית תכניות אימון למתחילים ולמתקדמים — מותאם אישית לפי מטרה, לוח זמנים ועומס.</p>
+        <div class="actions" style="margin-top:10px">
+          <a class="btn btn-primary" href="#lead">קבעו שיחת ייעוץ חינם</a>
+          <button id="waServices" class="btn-cta" type="button" aria-label="וואטסאפ מיידי">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.52 3.48A11.77 11.77 0 0 0 12.05 0C5.5 0 .22 5.28.22 11.79c0 2.08.55 4.07 1.6 5.85L0 24l6.52-1.67a11.77 11.77 0 0 0 5.53 1.41h.01c6.55 0 11.83-5.28 11.83-11.79 0-3.15-1.23-6.11-3.37-8.17zM12.06 21.5a9.7 9.7 0 0 1-4.95-1.36l-.35-.21-3.87.99 1.04-3.77-.23-.38a9.67 9.67 0 0 1-1.49-5.18c0-5.35 4.36-9.71 9.72-9.71 2.6 0 5.04 1.01 6.88 2.84a9.64 9.64 0 0 1 2.85 6.87c0 5.36-4.36 9.71-9.6 9.71zm5.53-7.28c-.3-.15-1.77-.88-2.05-.98-.27-.1-.47-.15-.67.15-.2.3-.77.98-.94 1.18-.17.2-.34.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.64-2.04-.17-.3-.02-.46.13-.61.14-.14.3-.37.45-.56.15-.2.2-.34.3-.57.1-.22.05-.41-.02-.57-.07-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51-.17-.01-.37-.01-.57-.01s-.53.07-.8.37c-.27.3-1.05 1.03-1.05 2.51 0 1.47 1.07 2.9 1.22 3.11.15.2 2.1 3.2 5.09 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.08 1.77-.72 2.02-1.41.25-.7.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35z"/></svg>
+            <span class="btn-label">וואטסאפ</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Certificates -->
+  <section id="certs">
+    <div class="container">
+      <h2>תעודות והכשרות</h2>
+      <div class="cert-grid" style="display:grid; gap:16px; grid-template-columns:repeat(3,1fr); padding:4px;">
+        <div class="panel"><h4 style="margin:0 0 6px">בוגר מכון וינגייט</h4><p class="subtle" style="margin:0">תעודת מדריך כושר גופני ובריאות מטעם מכון וינגייט.</p></div>
+        <div class="panel"><h4 style="margin:0 0 6px">תזונה והדרכת אורח חיים</h4><p class="subtle" style="margin:0">הסמכה בבניית תפריטי תזונה מותאמים אישית וליווי תזונתי.</p></div>
+        <div class="panel"><h4 style="margin:0 0 6px">השתלמויות מקצועיות</h4><p class="subtle" style="margin:0">אימון פונקציונלי · עבודה עם ילדים ונוער · שיקום תנועתי.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Studio Gallery -->
+  <section id="studio">
+    <div class="container">
+      <h2>הסטודיו והאווירה</h2>
+      <div class="carousel" id="carousel" role="region" aria-label="גלריית הסטודיו" tabindex="0">
+<div class="track" id="track" role="listbox" aria-live="polite">
+  <div class="slide" role="option" aria-selected="false">
+    <img src="assets/studio/1.webp" alt="סטודיו – תמונה 1" loading="eager" decoding="async">
+  </div>
+  <div class="slide" role="option" aria-selected="false">
+    <img src="assets/studio/2.webp" alt="סטודיו – תמונה 2" decoding="async">
+  </div>
+  <div class="slide" role="option" aria-selected="false">
+    <img src="assets/studio/3.webp" alt="סטודיו – תמונה 3" decoding="async">
+  </div>
+  <div class="slide" role="option" aria-selected="false">
+    <img src="assets/studio/4.webp" alt="סטודיו – תמונה 4" decoding="async">
+  </div>
+  <div class="slide" role="option" aria-selected="false">
+    <img src="assets/studio/5.webp" alt="סטודיו – תמונה 5" decoding="async">
+  </div>
+  <div class="slide" role="option" aria-selected="false">
+    <img src="assets/studio/6.webp" alt="סטודיו – תמונה 6" decoding="async">
+  </div>
+</div>
+        <button class="nav-btn prev" aria-label="תמונה קודמת" id="prev">‹</button>
+        <button class="nav-btn next" aria-label="תמונה הבאה" id="next">›</button>
+      </div>
+      <div class="dots" id="dots" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  <!-- Before & After: Interactive -->
+  <section id="beforeafter">
+    <div class="container">
+      <h2>לפני ואחרי</h2>
+      <div class="compare-wrap reveal">
+        <div class="compare" aria-label="השוואת תמונות לפני ואחרי">
+          <div class="compare-hint" aria-hidden="true" title="גררו את הכפתור להשוואה">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.7 12l3.6-3.6-1.4-1.4L4.9 13l6 6 1.4-1.4L8.7 14H20v-2H8.7z"/></svg>
+            גררו את הכפתור להשוואה
+            <svg viewBox="0 0 24 24" aria-hidden="true" style="transform:scaleX(-1)"><path d="M8.7 12l3.6-3.6-1.4-1.4L4.9 13l6 6 1.4-1.4L8.7 14H20v-2H8.7z"/></svg>
+          </div>
+
+          <img src="assets/before-after/1-before.png" alt="לפני" width="1080" height="1350" decoding="async">
+          <img src="assets/before-after/1-after.png" alt="אחרי" class="after" width="1080" height="1350" decoding="async">
+          <input type="range" min="0" max="100" value="50" class="slider" aria-label="השוואת לפני ואחרי">
+        </div>
+        <p class="subtle" style="margin-top:12px; text-align:center">טיפ: הזיזו את המחוון (הכפתור העגול) כדי לראות את ההבדל בין <b>לפני</b> ל-<b>אחרי</b>.</p>
+      </div>
+      <div class="actions" style="margin-top:12px; justify-content:center; display:flex;">
+        <a class="btn btn-primary" href="#lead">רוצה תוצאה דומה? השאר/י פרטים</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer style="padding:28px 0; border-top:1px solid #ffffff12; color:var(--muted)">
+    <div class="container" style="display:flex; justify-content:space-between; gap:12px; align-items:center; flex-wrap:wrap">
+      <div>© <span id="year"></span> Kobi Ben Akiva. כל הזכויות שמורות.</div>
+      <div class="subtle">טלפון: <a href="tel:+972505069235">050-5069235</a> · וואטסאפ: <a href="https://wa.me/972505069235" target="_blank" rel="noopener">לחץ לשיחה</a></div>
+    </div>
+  </footer>
+
+  <a class="sticky-cta" href="#lead" aria-label="קבלו תכנית מותאמת אישית">קבלו תכנית מותאמת</a>
+
+  <script>
+    const WA_NUMBER = "972505069235";
+
+    function buildWAText(){
+      const name = document.getElementById('name')?.value?.trim() || "";
+      const phone = document.getElementById('phone')?.value?.trim() || "";
+      const email = document.getElementById('email')?.value?.trim() || "";
+      const goal = document.getElementById('goal')?.value || "";
+      const time = document.getElementById('time')?.value || "";
+      const msg  = document.getElementById('msg')?.value?.trim() || "";
+      const text = `שלום, אני מעוניין/ת בייעוץ:
+שם: ${name}
+טלפון: ${phone}
+אימייל: ${email}
+יעד אימון: ${goal}
+שעה מועדפת: ${time}
+הודעה: ${msg}`;
+      return encodeURIComponent(text);
+    }
+    function openWA(){ window.open(`https://wa.me/${WA_NUMBER}?text=${buildWAText()}`, '_blank', 'noopener'); }
+
+    // חיבורי וואטסאפ
+    document.getElementById('waTop')?.addEventListener('click', openWA);
+    document.getElementById('waHero')?.addEventListener('click', openWA);
+    document.getElementById('waBtn')?.addEventListener('click', openWA);
+    document.getElementById('waServices')?.addEventListener('click', openWA);
+
+    // שנה דינמית לפוטר
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // תפריט המבורגר
+    const burger = document.querySelector('.burger');
+    const menu = document.getElementById('main-menu');
+    burger?.addEventListener('click', ()=>{
+      const open = menu.classList.toggle('open');
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      burger.setAttribute('aria-label', open ? 'סגירת תפריט' : 'פתיחת תפריט');
+    });
+    menu?.querySelectorAll('a').forEach(a=>{
+      a.addEventListener('click', ()=>{
+        menu.classList.remove('open'); burger?.setAttribute('aria-expanded','false');
+        burger?.setAttribute('aria-label','פתיחת תפריט');
+      });
+    });
+
+    // קרוסלה
+    const carousel = document.getElementById('carousel');
+    const track = document.getElementById('track');
+    const slides = Array.from(track?.children || []);
+    const prev = document.getElementById('prev');
+    const next = document.getElementById('next');
+    const dots = document.getElementById('dots');
+    let index = 0;
+
+    function updateCarousel(){
+      const w = track.parentElement.clientWidth;
+      track.style.transform = `translateX(-${index * w}px)`;
+      Array.from(dots.children).forEach((d,i)=>d.classList.toggle('active', i===index));
+      slides.forEach((s,i)=>s.setAttribute('aria-selected', i===index ? 'true' : 'false'));
+    }
+    function createDots(){
+      slides.forEach((_,i)=>{
+        const d = document.createElement('div');
+        d.className = 'dot' + (i===0 ? ' active' : '');
+        d.addEventListener('click', ()=>{ index = i; updateCarousel(); });
+        dots.appendChild(d);
+      });
+    }
+    function nextSlide(){ index = (index + 1) % slides.length; updateCarousel(); }
+    function prevSlide(){ index = (index - 1 + slides.length) % slides.length; updateCarousel(); }
+    next?.addEventListener('click', nextSlide);
+    prev?.addEventListener('click', prevSlide);
+    window.addEventListener('resize', updateCarousel);
+    if (slides.length){ createDots(); updateCarousel(); setInterval(nextSlide, 5000); }
+
+    // וידאו: אוטופליי + חסכון נתונים
+    const bgVideo = document.getElementById('bgVideo');
+    if(bgVideo){
+      bgVideo.muted = true;
+      const tryPlay = ()=> bgVideo.play().catch(()=>{});
+      document.addEventListener('visibilitychange', tryPlay, {once:true});
+      tryPlay();
+
+      const conn = navigator.connection || navigator.webkitConnection;
+      const lowData = conn && (['slow-2g','2g'].includes(conn.effectiveType) || conn.saveData);
+      if (lowData) {
+        bgVideo.removeAttribute('src');
+        const sources = bgVideo.querySelectorAll('source');
+        sources.forEach(s=>s.remove());
+        const isMobile = matchMedia('(max-width: 780px)').matches;
+        bgVideo.setAttribute('poster', isMobile ? 'assets/img/hero-poster-mobile.jpg' : 'assets/img/hero-poster.jpg');
+        bgVideo.load();
+      }
+    }
+
+    // גלילה חלקה מכפתור הגלילה השקוף
+    document.getElementById('scrollCue')?.addEventListener('click', ()=>{
+      document.getElementById('lead')?.scrollIntoView({behavior:'smooth', block:'start'});
+    });
+
+    // שינוי אטימות ההדר אחרי יציאה מההירו
+    const headerEl = document.querySelector('header');
+    const heroEl = document.querySelector('.hero');
+    if (headerEl && heroEl && 'IntersectionObserver' in window){
+      const io = new IntersectionObserver(entries=>{
+        entries.forEach(e=>{
+          headerEl.style.background = e.isIntersecting
+            ? 'transparent'
+            : 'linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,0))';
+        });
+      }, {root:null, threshold:0.01});
+      io.observe(heroEl);
+    }
+
+    // GA4 helper (יטען רק אם מוגדר gtag)
+    function gtagEvent(name, params){ window.gtag && gtag('event', name, params); }
+    ['waTop','waHero','waBtn','waServices'].forEach(id=>{
+      document.getElementById(id)?.addEventListener('click', ()=>gtagEvent('whatsapp_click',{location:id}));
+    });
+
+    // אנימציות reveal כלליות
+    (function(){
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const selectors = [
+        '.container > h2','.panel','.carousel','.actions','#services li',
+        '.hero .chip','.hero h1','.hero p','.hero .actions','.hero .badges',
+        '.compare-wrap'
+      ];
+      const nodes = document.querySelectorAll(selectors.join(','));
+      nodes.forEach((el, i) => {
+        el.classList.add('reveal');
+        if (i % 4 === 1) el.classList.add('delay-1');
+        if (i % 4 === 2) el.classList.add('delay-2');
+        if (i % 4 === 3) el.classList.add('delay-3');
+      });
+      if (prefersReduced) {
+        nodes.forEach(el => el.classList.add('in'));
+        document.getElementById('lead')?.classList.add('in-view');
+        return;
+      }
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('in'); io.unobserve(entry.target); } });
+      }, { threshold: 0.12, rootMargin: '0px 0px -10% 0px' });
+      nodes.forEach(el => io.observe(el));
+    })();
+
+    // הופעת #lead
+    (function(){
+      const lead = document.getElementById('lead');
+      if(!lead || !('IntersectionObserver' in window)) return;
+      const ioLead = new IntersectionObserver((entries)=>{
+        entries.forEach(en=>{
+          if(en.isIntersecting){
+            lead.classList.add('in-view');
+            ioLead.unobserve(lead);
+          }
+        });
+      }, {threshold: 0.12, rootMargin: '0px 0px -5% 0px'});
+      ioLead.observe(lead);
+    })();
+
+    // השוואת לפני/אחרי — לוגיקה
+    document.querySelectorAll('.compare').forEach(c=>{
+      const after = c.querySelector('.after');
+      const slider = c.querySelector('.slider');
+      slider?.addEventListener('input', e=>{
+        const v = Number(e.target.value);
+        after.style.clipPath = `inset(0 ${100-v}% 0 0)`;
+      });
+    });
+	
+// מעביר את #lead לסוף העמוד (לפני ה-footer) במובייל ומחזיר בדסקטופ
+(function(){
+  const lead   = document.getElementById('lead');
+  const footer = document.querySelector('footer');
+  const beforeAfter = document.getElementById('beforeafter');
+  if (!lead || !footer) return;
+
+  // מיקום מקורי לדסקטופ
+  const originalParent = lead.parentNode;
+  const originalNext   = lead.nextElementSibling;
+
+  const mq = window.matchMedia('(max-width: 780px)');
+
+  function forceVisible(){
+    // ביטחון נוסף: לוודא שהסקשנים גלויים אחרי כל הזזה
+    [lead, beforeAfter].forEach(sec=>{
+      if(!sec) return;
+      sec.style.opacity   = '1';
+      sec.style.transform = 'none';
+      sec.style.filter    = 'none';
+      sec.classList.add('in-view');
+      sec.querySelectorAll('.reveal').forEach(el=>{
+        el.style.opacity   = '1';
+        el.style.transform = 'none';
+        el.style.filter    = 'none';
+        el.classList.add('in');
+      });
+    });
+  }
+
+  function relocate(e){
+    const isMobile = e ? e.matches : mq.matches;
+
+    if (isMobile) {
+      // להזיז לסוף (ממש לפני ה-footer) – לא נשאר רווח במקום כי אנחנו מזיזים את אותו node
+      if (lead.nextElementSibling !== footer) {
+        footer.parentNode.insertBefore(lead, footer);
+      }
+    } else {
+      // להחזיר למקום המקורי בדסקטופ
+      if (originalParent) {
+        if (originalNext && originalNext.parentNode === originalParent) {
+          originalParent.insertBefore(lead, originalNext);
+        } else {
+          originalParent.appendChild(lead);
+        }
+      }
+    }
+    forceVisible();
+  }
+
+  relocate();
+  (mq.addEventListener ? mq.addEventListener('change', relocate)
+                       : mq.addListener(relocate));
+})();
+  
+</script>
+</body>
+</html>
