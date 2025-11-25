@@ -470,7 +470,59 @@
     font-size: 22px;
   }
 }
+/* פאנל נגישות */
+.access-panel{
+  position: fixed;
+  bottom: 80px;
+  inset-inline-end: 20px;
+  width: 260px;
+  background:#111;
+  border:1px solid #ffffff33;
+  border-radius:16px;
+  padding:16px;
+  box-shadow:0 8px 22px rgba(0,0,0,.55);
+  z-index:9999;
+  display:none;
+}
+.access-panel h3{
+  margin:0 0 12px;
+  font-size:1.1rem;
+  color:#f7f7f7;
+  text-align:center;
+}
+.acc-option{
+  width:100%;
+  margin-bottom:8px;
+  padding:10px;
+  border-radius:10px;
+  background:#222;
+  color:#fff;
+  border:1px solid #ffffff22;
+  cursor:pointer;
+  transition:.2s ease;
+}
+.acc-option:hover{
+  background:#333;
+}
+.acc-more{
+  display:block;
+  margin-top:10px;
+  text-align:center;
+  color:#f6e27a;
+}
 
+/* אפקטים */
+.high-contrast{
+  filter: contrast(1.4) brightness(1.2);
+}
+.highlight-links a{
+  outline:2px dashed yellow !important;
+}
+.readable-font{
+  font-family: Arial, sans-serif !important;
+}
+
+	  
   </style>
 </head>
 <body>
@@ -731,12 +783,25 @@
 
   <a class="sticky-cta" href="#lead" aria-label="קבלו תכנית מותאמת אישית">קבלו תכנית מותאמת</a>
 
-<!-- כפתור נגישות צף -->
-<a href="/accessibility.html"
-   class="accessibility-button"
-   aria-label="מידע על נגישות האתר">
+<button class="accessibility-button" id="accessBtn" aria-label="פתיחת תפריט נגישות">
   ♿
-</a>
+</button>
+
+<!-- פאנל נגישות -->
+<div id="accessPanel" class="access-panel" aria-hidden="true">
+  <h3>אפשרויות נגישות</h3>
+
+  <button class="acc-option" id="incFont">הגדלת גופן</button>
+  <button class="acc-option" id="decFont">הקטנת גופן</button>
+  <button class="acc-option" id="highContrast">ניגודיות גבוהה</button>
+  <button class="acc-option" id="highlightLinks">הדגשת קישורים</button>
+  <button class="acc-option" id="readableFont">פונט קריא</button>
+
+  <!-- קישור לדף נגישות -->
+  <a href="/accessibility.html" class="acc-more" target="_blank" rel="noopener">
+    דף הצהרת נגישות מלאה
+  </a>
+</div>
 
 	
   <script>
@@ -965,7 +1030,40 @@
   (mq.addEventListener ? mq.addEventListener('change', relocate)
                        : mq.addListener(relocate));
 })();
-  
+// ===== פאנל נגישות =====
+const accessBtn = document.getElementById('accessBtn');
+const accessPanel = document.getElementById('accessPanel');
+
+accessBtn.addEventListener('click', ()=>{
+  const isOpen = accessPanel.style.display === 'block';
+  accessPanel.style.display = isOpen ? 'none' : 'block';
+});
+
+// הגדלת גופן
+document.getElementById('incFont').addEventListener('click', ()=>{
+  document.body.style.fontSize = 'larger';
+});
+
+// הקטנת גופן
+document.getElementById('decFont').addEventListener('click', ()=>{
+  document.body.style.fontSize = 'smaller';
+});
+
+// ניגודיות גבוהה
+document.getElementById('highContrast').addEventListener('click', ()=>{
+  document.body.classList.toggle('high-contrast');
+});
+
+// הדגשת קישורים
+document.getElementById('highlightLinks').addEventListener('click', ()=>{
+  document.body.classList.toggle('highlight-links');
+});
+
+// פונט קריא
+document.getElementById('readableFont').addEventListener('click', ()=>{
+  document.body.classList.toggle('readable-font');
+});
+
 </script>
 </body>
 </html>
