@@ -428,6 +428,48 @@
             mask-image: linear-gradient(to bottom, #000 0%, #000 65%, transparent 100%);
   }
 }
+/* כפתור נגישות צף */
+.accessibility-button{
+  position: fixed;
+  bottom: 18px;
+  inset-inline-end: 18px; /* בצד שמאל ויזואלית ב-RTL. אם רוצה בצד ימין – שנה ל-inset-inline-start */
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 1px solid #ffffff33;
+  background: #000000dd;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  cursor: pointer;
+  z-index: 9999;
+  box-shadow: 0 6px 18px rgba(0,0,0,.4);
+  transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+}
+
+.accessibility-button:hover{
+  background: #111111ee;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(0,0,0,.55);
+}
+
+.accessibility-button:focus{
+  outline: 3px solid #ffff00;
+  outline-offset: 3px;
+}
+
+/* במובייל – קצת יותר קטן */
+@media (max-width: 780px){
+  .accessibility-button{
+    bottom: 16px;
+    inset-inline-end: 16px;
+    width: 46px;
+    height: 46px;
+    font-size: 22px;
+  }
+}
 
   </style>
 </head>
@@ -689,6 +731,14 @@
 
   <a class="sticky-cta" href="#lead" aria-label="קבלו תכנית מותאמת אישית">קבלו תכנית מותאמת</a>
 
+<!-- כפתור נגישות צף -->
+<a href="/accessibility.html"
+   class="accessibility-button"
+   aria-label="מידע על נגישות האתר">
+  ♿
+</a>
+
+	
   <script>
     const WA_NUMBER = "972505069235";
 
